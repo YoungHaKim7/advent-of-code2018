@@ -1,16 +1,7 @@
 use std::collections::HashSet;
-use std::io::{self, Read, Write};
+use std::io::{self, Write};
 
-type Result<T> = ::std::result::Result<T, Box<::std::error::Error>>;
-
-fn main() -> Result<()> {
-    let mut input = String::new();
-    io::stdin().read_to_string(&mut input)?;
-
-    part1(&input)?;
-    part2(&input)?;
-    Ok(())
-}
+type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
 
 fn part1(input: &str) -> Result<()> {
     let mut freq = 0;
@@ -38,4 +29,14 @@ fn part2(input: &str) -> Result<()> {
             seen.insert(freq);
         }
     }
+}
+
+fn main() -> Result<()> {
+    let input = include_str!("../input/input.txt");
+    // std::fs::File::open("../input/input.txt");
+    // io::stdin().read_to_end(&mut input)?;
+
+    part1(input)?;
+    part2(input)?;
+    Ok(())
 }
